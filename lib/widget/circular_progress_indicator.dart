@@ -1,4 +1,4 @@
-// @description 圆形进度指示器
+// @description
 // @Created by yifang
 // @Date   4/29/21
 // @email  a12162266@163.com
@@ -10,39 +10,39 @@ import 'package:flutter/material.dart';
 /// A circular progress indicator with gradient effect.
 class GradientCircularProgressIndicator extends StatelessWidget {
   const GradientCircularProgressIndicator({
-    Key key,
+    Key? key,
     this.stokeWidth = 2.0,
-    @required this.radius,
-    @required this.colors,
+    required this.radius,
+    required this.colors,
     this.stops,
     this.strokeCapRound = false,
     this.backgroundColor = const Color(0xFFEEEEEE),
     this.totalAngle = 2 * pi,
     this.value,
   }) :super(key: key);
-  
+
   /// The width of the line used to draw the circle.
   final double stokeWidth;
-  
+
   /// The radius of the [GradientCircularProgressIndicator]
   final double radius;
-  
+
   /// The kind of finish to place on the end of arc drawn .
   /// if `true`, [StrokeCap.round] will be set to `Paint.strokeCap`.
   final bool strokeCapRound;
-  
+
   /// The value of this progress indicator with 0.0 corresponding
   /// to no progress having been made and 1.0 corresponding to all the progress
   /// having been made.
-  final double value;
-  
+  final double? value;
+
   /// The progress indicator's background color. The current theme's
   /// `Color(0xFFEEEEEE)` by default.
   final Color backgroundColor;
-  
+
   /// The total angle of the progress. Defaults to 2*pi (entire circle)
   final double totalAngle;
-  
+
   /// The colors the gradient should obtain at each of the stops.
   ///
   /// If [stops] is non-null, this list must have the same length as [stops].
@@ -50,7 +50,7 @@ class GradientCircularProgressIndicator extends StatelessWidget {
   /// This list must have at least two colors in it (otherwise, it's not a
   /// gradient!).
   final List<Color> colors;
-  
+
   /// A list of values from 0.0 to 1.0 that denote fractions along the gradient.
   ///
   /// If non-null, this list must have the same length as [colors].
@@ -67,21 +67,21 @@ class GradientCircularProgressIndicator extends StatelessWidget {
   ///
   /// If stops is null, then a set of uniformly distributed stops is implied,
   /// with the first stop at 0.0 and the last stop at 1.0.
-  final List<double> stops;
-  
+  final List<double>? stops;
+
   @override
   Widget build(BuildContext context) {
     double _offset = .0;
     if (strokeCapRound) {
       _offset = asin(stokeWidth / (radius * 2 - stokeWidth));
     }
-    var _colors = colors;
-    if (_colors == null) {
-      final Color color = Theme
-          .of(context)
-          .accentColor;
-      _colors = [color, color];
-    }
+    final _colors = colors;
+    // if (_colors == null) {
+    //   final Color color = Theme
+    //       .of(context)
+    //       .accentColor;
+    //   _colors = [color, color];
+    // }
     return Transform.rotate(
       angle: -pi / 2.0 - _offset,
       child: CustomPaint(
@@ -105,48 +105,48 @@ class _GradientCircularProgressPainter extends CustomPainter {
     this.backgroundColor = const Color(0xFFEEEEEE),
     this.radius,
     this.total = 2 * pi,
-    @required this.colors,
+    required this.colors,
     this.stops,
     this.value});
-  
+
   final double stokeWidth;
   final bool strokeCapRound;
-  final double value;
+  final double? value;
   final Color backgroundColor;
   final List<Color> colors;
   final double total;
-  final double radius;
-  final List<double> stops;
-  
+  final double? radius;
+  final List<double>? stops;
+
   @override
   void paint(Canvas canvas, Size size) {
     if (radius != null) {
-      size = Size.fromRadius(radius);
+      size = Size.fromRadius(radius!);
     }
     final double _offset = stokeWidth / 2.0;
     double _value = value ?? .0;
     _value = _value.clamp(.0, 1.0) * total;
     double _start = .0;
-    
+
     if (strokeCapRound) {
       _start = asin(stokeWidth / (size.width - stokeWidth));
     }
-    
+
     final Rect rect = Offset(_offset, _offset) &
     Size(size.width - stokeWidth, size.height - stokeWidth);
-    
+
     final Paint paint = Paint()
       ..strokeCap = strokeCapRound ? StrokeCap.round : StrokeCap.butt
       ..style = PaintingStyle.stroke
       ..isAntiAlias = true
       ..strokeWidth = stokeWidth;
-    
+
     // draw background arc
     if (backgroundColor != Colors.transparent) {
       paint.color = backgroundColor;
       canvas.drawArc(rect, _start, total, false, paint);
     }
-    
+
     // draw foreground arc.
     // apply gradient
     if (_value > 0) {
@@ -156,27 +156,27 @@ class _GradientCircularProgressPainter extends CustomPainter {
         colors: colors,
         stops: stops,
       ).createShader(rect);
-      
+
       canvas.drawArc(rect, _start, _value, false, paint);
     }
   }
-  
+
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
 
 class AnimatedRotationBox extends StatefulWidget {
   const AnimatedRotationBox({
-    Key key,
+    Key? key,
     this.child,
     this.duration = const Duration(seconds: 1),
     this.curve = Curves.linear,
   }) :super(key: key);
-  
-  final Widget child;
+
+  final Widget? child;
   final Duration duration;
   final Curve curve;
-  
+
   @override
   _AnimatedRotationBoxState createState() {
     return _AnimatedRotationBoxState();
@@ -185,8 +185,8 @@ class AnimatedRotationBox extends StatefulWidget {
 
 class _AnimatedRotationBoxState extends State<AnimatedRotationBox>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  
+  late AnimationController _animationController;
+
   @override
   void initState() {
     super.initState();
@@ -194,7 +194,7 @@ class _AnimatedRotationBoxState extends State<AnimatedRotationBox>
         AnimationController(vsync: this, duration: widget.duration);
     _animationController.repeat();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return RotationTransition(
@@ -202,13 +202,13 @@ class _AnimatedRotationBoxState extends State<AnimatedRotationBox>
         CurvedAnimation(parent: _animationController, curve: widget.curve),
         child: widget.child);
   }
-  
+
   @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
-  
+
   @override
   void didUpdateWidget(AnimatedRotationBox oldWidget) {
     super.didUpdateWidget(oldWidget);

@@ -12,21 +12,12 @@ import '../../widget/state_widget.dart';
 import 'view_model_net.dart';
 import 'view_state.dart';
 
-abstract class ViewModelStateful extends StatefulWidget {
-  const ViewModelStateful({Key key}):super(key:key);
-  
-  @override
-  State<ViewModelStateful> createState() => createBaseState();
-  
-  State<StatefulWidget> createBaseState();
-}
-
-abstract class ViewModelStatefulState<T extends ViewModelStateful, V extends ViewModelNet> extends State<T> {
-  V _viewModel;
-  BuildContext _mContext;
+abstract class ViewModelStatefulState<T extends StatefulWidget, V extends ViewModelNet> extends State<T> {
+  late V _viewModel;
+  late BuildContext _mContext;
 
   V get viewModel => _viewModel;
-  BuildContext get mContext => _mContext;
+  BuildContext? get mContext => _mContext;
   
   @override
   void initState() {
@@ -37,7 +28,7 @@ abstract class ViewModelStatefulState<T extends ViewModelStateful, V extends Vie
   
   @override
   void dispose() {
-    _viewModel?.dispose();
+    _viewModel.dispose();
     super.dispose();
   }
   
@@ -53,14 +44,14 @@ abstract class ViewModelStatefulState<T extends ViewModelStateful, V extends Vie
   String setTitle();
   
   ///设置Appbar的actions
-  List<Widget> setActions() => null;
+  List<Widget>? setActions() => null;
   
   ///可以重写这个方法, 设置Appbar
   PreferredSizeWidget setAppbar() {
-    return CommonAppbar(setTitle(), actions: setActions(),);
+    return CommonAppbar(setTitle(), actions: setActions());
   }
   
-  Color setBackgroundColor() => null;
+  Color? setBackgroundColor() => null;
   
   ///成功页面的组件
   Widget succeedWidget();
@@ -69,20 +60,30 @@ abstract class ViewModelStatefulState<T extends ViewModelStateful, V extends Vie
   Widget loadingWidget() {
     return const LoadWidget();
   }
+
+  ///空组件
+  Widget emptyWidget() {
+    return const EmptyWidget();
+  }
   
   ///错误组件
   Widget errorWidget() {
     return GestureDetector(
-      onTap: () => _viewModel.loadData(),
+      onTap: () => _viewModel.onRefresh(init: true),
       child: TGErrorWidget(
-        text: viewModel.viewStateError.message,
+        text: viewModel.viewStateError!.message,
       ),
     );
   }
-  
-  ///空组件
-  Widget emptyWidget() {
-    return const EmptyWidget();
+
+  /// 未登录组件
+  Widget unLoginWidget() {
+    return GestureDetector(
+      onTap: () => _viewModel.onRefresh(init: true),
+      child: TGErrorWidget(
+        text: viewModel.viewStateError!.message,
+      ),
+    );
   }
   
   @override
@@ -102,8 +103,10 @@ abstract class ViewModelStatefulState<T extends ViewModelStateful, V extends Vie
                 return emptyWidget();
               case ViewState.loading:
                 return loadingWidget();
-              default:
+              case ViewState.error:
                 return errorWidget();
+              case ViewState.unAuthorized:
+                return unLoginWidget();
             }
           },
         ),

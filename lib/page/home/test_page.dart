@@ -17,13 +17,13 @@ class TestPage extends StatelessWidget {
   
   const TestPage({this.list, this.testModel});
   
-  final List<int> list;
-  final TestModel testModel;
+  final List<int>? list;
+  final TestModel? testModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(testModel.text),
+        child: Text(testModel!.text),
       ),
     );
   }

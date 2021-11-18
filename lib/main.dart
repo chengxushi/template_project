@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
         dividerColor: Colors.grey, //分割线默认颜色
       ),
       home: HomePage(),
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         child = botToastBuilder(context, child);
         return MediaQuery(
           ///保证文字大小不受手机系统设置影响

@@ -9,8 +9,8 @@ import '../common/info/app_color.dart';
 class ButtonNotarizeWidget extends StatelessWidget {
   
   const ButtonNotarizeWidget({
-    Key key,
-    @required this.onTop,
+    Key? key,
+    required this.onTop,
     this.text = '确定',
     this.textColor = Colors.white,
     this.textSize = 14,
@@ -28,10 +28,10 @@ class ButtonNotarizeWidget extends StatelessWidget {
   final Color textColor;
   final double textSize;
   final Color backgroundColor;
-  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry? margin;
   final double borderRadius;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final double borderWidth;
   final EdgeInsetsGeometry padding;
   

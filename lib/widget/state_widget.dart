@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EmptyWidget extends StatelessWidget {
-  const EmptyWidget({Key key, this.text = '暂无数据'}) : super(key: key);
+  const EmptyWidget({Key? key, this.text = '暂无数据'}) : super(key: key);
   
   final String text;
 
@@ -38,10 +38,10 @@ class EmptyWidget extends StatelessWidget {
 }
 
 class TGErrorWidget extends StatelessWidget {
-  const TGErrorWidget({Key key, this.text = '加载失败', this.onTop, this.errorMessage = ''}) : super(key: key);
+  const TGErrorWidget({Key? key, this.text = '加载失败', this.onTop, this.errorMessage = ''}) : super(key: key);
   
-  final String text;
-  final GestureTapCallback onTop;
+  final String? text;
+  final GestureTapCallback? onTop;
   final String errorMessage;
   
   @override
@@ -64,7 +64,7 @@ class TGErrorWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Text(text, style: const TextStyle(fontSize: 16, color: Color(0xFF999999),),),
+              child: Text(text!, style: const TextStyle(fontSize: 16, color: Color(0xFF999999),),),
             ),
           ],
         ),
@@ -74,7 +74,7 @@ class TGErrorWidget extends StatelessWidget {
 }
 
 class LoadWidget extends StatelessWidget {
-  const LoadWidget({Key key,}) : super(key: key);
+  const LoadWidget({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {

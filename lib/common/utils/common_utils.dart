@@ -3,7 +3,7 @@
 // @Date   2021/8/31
 // @email  a12162266@163.com
 
-class Utils{
-  Utils._();
+class CommonUtils{
+  CommonUtils._();
   
 }

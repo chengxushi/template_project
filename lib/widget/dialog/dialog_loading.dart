@@ -22,7 +22,7 @@ CancelFunc showDialogLoading() {
           AnimatedRotationBox(
             child: GradientCircularProgressIndicator(
               radius: 20,
-              colors: [Colors.grey[500], Colors.grey[300], Colors.grey[50],],
+              colors: [Colors.grey[500]!, Colors.grey[300]!, Colors.grey[50]!,],
               value: 0.8,
               backgroundColor: Colors.transparent,
             ),

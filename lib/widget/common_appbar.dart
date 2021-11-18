@@ -9,10 +9,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CommonAppbar extends StatelessWidget implements PreferredSizeWidget{
-  const CommonAppbar(this.title, {Key key, this.actions}) : super(key: key);
+  const CommonAppbar(this.title, {Key? key, this.actions}) : super(key: key);
   
   final String title;
-  final List<Widget> actions;
+  final List<Widget>? actions;
   
   @override
   Widget build(BuildContext context) {

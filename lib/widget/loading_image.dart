@@ -13,8 +13,8 @@ enum ImageShape {
 
 class LoadingImage extends StatelessWidget {
   const LoadingImage({
-    Key key,
-    @required this.url,
+    Key? key,
+    required this.url,
     this.defaultImage = 'icon_head.png',
     this.errorImage = 'icon_head.png',
     this.height,
@@ -29,10 +29,10 @@ class LoadingImage extends StatelessWidget {
   final String url;
   final String defaultImage;
   final String errorImage;
-  final double height;
-  final double width;
-  final int cacheHeight;
-  final int cacheWidth;
+  final double? height;
+  final double? width;
+  final int? cacheHeight;
+  final int? cacheWidth;
   final BoxFit fit;
   final ImageShape imageShape;
   final BorderRadius borderRadius;

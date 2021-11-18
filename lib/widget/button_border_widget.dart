@@ -9,8 +9,8 @@ import '../common/info/app_color.dart';
 class ButtonBorderWidget extends StatelessWidget {
   
   const ButtonBorderWidget({
-    Key key,
-    @required this.onTop,
+    Key? key,
+    required this.onTop,
     this.text = '确定',
     this.textColor = Colors.white,
     this.textSize = 14,
@@ -27,13 +27,13 @@ class ButtonBorderWidget extends StatelessWidget {
   final String text;
   final Color textColor;
   final double textSize;
-  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry? margin;
   final Color borderColor;
   final double borderWidth;
   final double borderRadius;
   final EdgeInsetsGeometry padding;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   
   @override
   Widget build(BuildContext context) {

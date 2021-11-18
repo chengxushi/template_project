@@ -37,7 +37,7 @@ class _TestPage {
 
   String get name => 'testPage';
 
-  Map<String, dynamic> d({List<int> list, TestModel testModel}) =>
+  Map<String, dynamic> d({List<int>? list, TestModel? testModel}) =>
       <String, dynamic>{
         'list': list,
         'testModel': testModel,

@@ -16,13 +16,13 @@ enum ErrorType {
 
 class ViewStateError {
   ViewStateError(this.errorType, {this.message, this.errorMessage}) {
-    errorType ??= ErrorType.defaultError;
+    // errorType ??= ErrorType.defaultError;
     message ??= errorMessage;
   }
   
   ErrorType errorType;
-  String message;
-  String errorMessage;
+  String? message;
+  String? errorMessage;
 
   /// 以下变量是为了代码书写方便,加入的get方法.严格意义上讲,并不严谨
   bool get isNetworkError => errorType == ErrorType.networkError;
