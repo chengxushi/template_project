@@ -7,8 +7,8 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../widget/common_appbar.dart';
-import '../../widget/state_widget.dart';
+import '../../../widget/common_appbar.dart';
+import '../../../widget/state_widget.dart';
 import 'view_model_net.dart';
 import 'view_state.dart';
 

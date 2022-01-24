@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:template_project/common/base/http/http_manager.dart';
-import 'package:template_project/common/base/view_model_net.dart';
-import 'package:template_project/common/base/view_model_stateful.dart';
+import 'package:template_project/common/base/view_model/view_model_net.dart';
+import 'package:template_project/common/base/view_model/view_model_stateful.dart';
 import 'package:template_project/model/test_model.dart';
+
+import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
 
 /// @description
 /// @Created by yifang
@@ -36,12 +38,16 @@ class TestVm extends ViewModelNet<TestModel> {
 
 }
 
-class TestPage extends StatefulWidget {
+@FFRoute(
+  name: '/TestVmPage',
+  description: '',
+)
+class TestVmPage extends StatefulWidget {
   @override
-  _TestPageState createState() => _TestPageState();
+  _TestVmPageState createState() => _TestVmPageState();
 }
 
-class _TestPageState extends ViewModelStatefulState<TestPage, TestVm> {
+class _TestVmPageState extends ViewModelStatefulState<TestVmPage, TestVm> {
 
   @override
   void initState() {

@@ -22,8 +22,8 @@ dependencies:
     git:
       url: https://github.com/chengxushi/d_logger.git # 打印
   flutter_svg: ^0.22.0 #svg图片
-  ff_annotation_route_core: ^2.0.2 #路由管理
-  ff_annotation_route_library: ^2.0.1 #路由管理
+  ff_annotation_route_core: 2.0.4 #路由管理
+  ff_annotation_route_library: 3.0.0 #路由管理
 
 dev_dependencies:
   flutter_test:

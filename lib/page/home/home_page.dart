@@ -4,6 +4,7 @@
 // @email  a12162266@163.com
 
 import 'package:ff_annotation_route_core/ff_annotation_route_core.dart';
+import 'package:ff_annotation_route_library/ff_annotation_route_library.dart';
 import 'package:flutter/material.dart';
 import 'package:template_project/model/test_model.dart';
 import 'package:template_project/page/test/test_vm.dart';
@@ -41,7 +42,9 @@ class _HomePageState extends State<HomePage> {
             //     testModel: TestModel(2, '测试参数'),
             //   )
             // );
-            Navigator.push(context, MaterialPageRoute(builder: (context) => TestPage(),),);
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => TestPage(),),);
+            // Navigator.pushNamed(context, Routes.testVmPage);
+            FFRouterDelegate.of(context).pushNamed(Routes.testVmPage);
           },
           child: Text('首页'),
         ),

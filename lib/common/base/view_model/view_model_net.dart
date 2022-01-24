@@ -6,8 +6,8 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
-import 'http/http_callback.dart';
-import 'http/http_manager.dart';
+import '../http/http_callback.dart';
+import '../http/http_manager.dart';
 import 'view_state.dart';
 import 'view_state_model.dart';
 

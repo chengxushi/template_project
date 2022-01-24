@@ -6,6 +6,8 @@
 class HttpStatusConstants{
   /// 成功
   static const int code_success = 200;
+  /// 未知异常
+  static const int code_error_network = -201;
   /// json数据解析异常
   static const int code_error_serialization = -1;
 }

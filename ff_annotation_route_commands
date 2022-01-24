@@ -1,1 +1,1 @@
--o route -s --routes-file-output route --no-null-safety --supper-arguments
+-o route --routes-file-output route --null-safety --super-arguments -s

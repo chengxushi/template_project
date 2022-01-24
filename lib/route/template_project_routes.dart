@@ -7,6 +7,7 @@ import 'package:template_project/model/test_model.dart';
 
 const List<String> routeNames = <String>[
   '/',
+  '/TestVmPage',
   'testPage',
 ];
 
@@ -20,6 +21,11 @@ class Routes {
   /// [description] : 'home'
   static const String root = '/';
 
+  /// '/TestVmPage'
+  ///
+  /// [name] : '/TestVmPage'
+  static const String testVmPage = '/TestVmPage';
+
   /// '测试法法路由'
   ///
   /// [name] : 'testPage'
@@ -28,7 +34,7 @@ class Routes {
   ///
   /// [constructors] :
   ///
-  /// TestPage : [List<int> list, TestModel testModel]
+  /// TestPage : [List<int>? list, TestModel? testModel]
   static const _TestPage testPage = _TestPage();
 }
 

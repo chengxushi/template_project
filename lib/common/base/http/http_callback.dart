@@ -1,6 +1,4 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
-import 'package:template_project/widget/dialog/dialog_loading.dart';
 
 import 'http_result_model.dart';
 import 'http_status_constants.dart';
@@ -76,6 +74,7 @@ class HttpCallback{
     }
   }
 
+  /// 异常处理
   String handleError(DioError dioError) {
     String errorDescription = '';
     switch (dioError.type) {
@@ -118,40 +117,17 @@ class HttpCallback{
 
   /// 非正常返回，通常是网络异常问题
   /// [msg] 异常描述
+  /// 预防网络异常后没有任何操作, onNetWorkErrorCallback为空时就回调onHttpFailCallback
   void onNetWorkError(String msg){
-    onNetWorkErrorCallback?.call(msg);
+    if(onNetWorkErrorCallback != null) {
+      onNetWorkErrorCallback!.call(msg);
+    } else {
+      onHttpFail(HttpStatusConstants.code_error_network, msg);
+    }
   }
 
   /// 请求完成
   void onComplete(){
     onCompleteCallback?.call();
   }
-}
-
-Future<HttpCallback> sendHttpRequest({
-  required Future<Response> httpRequest,
-  required bool showLoadingDialog,
-  OnHttpSuccessFunction? onHttpSuccessCallback,
-  OnHttpFailFunction? onHttpFailCallback,
-  OnNetWorkErrorFunction? onNetWorkErrorCallback,
-  OnCompleteFunction? onCompleteCallback,
-}) async {
-  CancelFunc? cancelFunc;
-  if(showLoadingDialog) {
-    cancelFunc = showDialogLoading();
-  }
-  final HttpCallback httpCallback = HttpCallback(
-    onHttpSuccessCallback: onHttpSuccessCallback,
-    onHttpFailCallback: onHttpFailCallback,
-    onNetWorkErrorCallback: onNetWorkErrorCallback,
-    onCompleteCallback: () {
-      if(showLoadingDialog) {
-        cancelFunc?.call();
-        cancelFunc = null;
-      }
-      onCompleteCallback?.call();
-    },
-  );
-  await httpCallback.sendHttpRequest(httpRequest);
-  return httpCallback;
 }

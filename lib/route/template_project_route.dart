@@ -8,11 +8,13 @@ import 'package:ff_annotation_route_library/ff_annotation_route_library.dart';
 import 'package:flutter/widgets.dart';
 import '../page/home/home_page.dart';
 import '../page/home/test_page.dart';
+import '../page/test/test_vm.dart';
 
 // ignore_for_file: prefer_const_literals_to_create_immutables,unused_local_variable,unused_import
 FFRouteSettings getRouteSettings({
   required String name,
   Map<String, dynamic>? arguments,
+  PageBuilder? notFoundPageBuilder,
 }) {
   final Map<String, dynamic> safeArguments =
       arguments ?? const <String, dynamic>{};
@@ -21,20 +23,38 @@ FFRouteSettings getRouteSettings({
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        widget: HomePage(),
+        builder: (){
+          return HomePage();
+        },
         description: 'home',
+      );
+    case '/TestVmPage':
+      return FFRouteSettings(
+        name: name,
+        arguments: arguments,
+        builder: (){
+          return TestVmPage();
+        },
       );
     case 'testPage':
       return FFRouteSettings(
         name: name,
         arguments: arguments,
-        widget: TestPage(
-          list: asT<List<int>>(safeArguments['list']),
-          testModel: asT<TestModel>(safeArguments['testModel']),
-        ),
+        builder: (){
+          return TestPage(
+            list: asT<List<int>?>(safeArguments['list']),
+            testModel: asT<TestModel?>(safeArguments['testModel']),
+          );
+        },
         description: '测试法法路由',
       );
     default:
-      return const FFRouteSettings(name: '404', routeName: '404_page');
+      return FFRouteSettings(
+        name: '404',
+        routeName: '404_page',
+        builder: (){
+          return notFoundPageBuilder?.call() ?? Container();
+        },
+      );
   }
 }
